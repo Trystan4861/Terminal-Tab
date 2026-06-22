@@ -1,4 +1,4 @@
-# 🚀 Terminal Tab
+# 🚀 Terminal Tab Launcher
 
 ![Logo](icon.png)
 
@@ -8,9 +8,9 @@ Convierte tu editor en un auténtico centro de control.
 
 ---
 
-## ✨ ¿Por qué Terminal Tab?
+## ✨ ¿Por qué Terminal Tab Launcher?
 
-Terminal Tab está pensado para desarrolladores que viven en su editor y trabajan constantemente con:
+Terminal Tab Launcher está pensado para desarrolladores que viven en su editor y trabajan constantemente con:
 
 - CLIs de Inteligencia Artificial 🤖  
 - Herramientas de build ⚙️  
@@ -24,7 +24,7 @@ En lugar de cambiar de panel o dividir la pantalla, simplemente pulsa tu atajo y
 
 ## 🤖 Ideal para Claude y otros CLIs de LLMs
 
-Terminal Tab brilla especialmente cuando lo usas con herramientas modernas de IA en línea de comandos.
+Terminal Tab Launcher brilla especialmente cuando lo usas con herramientas modernas de IA en línea de comandos.
 
 Puedes configurarlo para lanzar al instante:
 
@@ -89,7 +89,7 @@ Ctrl+F1 (Windows/Linux)
 O ejecuta:
 
 ```txt
-Terminal Tab: Open Terminal
+Terminal Tab Launcher: Open Terminal
 ```
 
 desde la paleta de comandos.
@@ -100,8 +100,8 @@ desde la paleta de comandos.
 
 Puedes configurar el comando de tres formas:
 
-1. **Paleta → Terminal Tab: Set command**
-2. **Paleta → Terminal Tab: Open command setting**
+1. **Paleta → Terminal Tab Launcher: Set command**
+2. **Paleta → Terminal Tab Launcher: Open command setting**
 3. Desde la configuración de VS Code:
 
 ```txt
@@ -130,7 +130,7 @@ Documentación en inglés: [README.md](README.md)
 
 ## 🔥 Pensado para el desarrollo moderno
 
-Terminal Tab nace en un contexto donde:
+Terminal Tab Launcher nace en un contexto donde:
 
 - La IA forma parte del flujo diario
 - Muchas herramientas viven en la terminal

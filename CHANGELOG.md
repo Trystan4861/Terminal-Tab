@@ -1,6 +1,6 @@
 # Changelog
 
-Todos los cambios relevantes del proyecto **Terminal Tab** serán documentados en este archivo.
+Todos los cambios relevantes del proyecto **Terminal Tab Launcher** serán documentados en este archivo.
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/) y este proyecto sigue versionado semántico.
 
@@ -10,7 +10,7 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 
 ### 🎉 Versión Inicial
 
-Primera versión estable de la extensión **Terminal Tab** para Visual Studio Code.
+Primera versión estable de la extensión **Terminal Tab Launcher** para Visual Studio Code.
 
 ### ✨ Características principales
 

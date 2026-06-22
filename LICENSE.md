@@ -1,6 +1,6 @@
 # License
 
-## Terminal Tab
+## Terminal Tab Launcher
 
 VS Code Extension  
 
@@ -67,4 +67,4 @@ You may obtain a copy of the License at:
 
 ---
 
-Terminal Tab © 2026 Manuel Palanco Correa (trystan4861)
+Terminal Tab Launcher © 2026 Manuel Palanco Correa (trystan4861)

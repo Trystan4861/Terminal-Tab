@@ -15,7 +15,7 @@ function getConfiguredCommand() {
  */
 function updateStatusBarTooltip() {
   const command = getConfiguredCommand();
-  statusBarItem.tooltip = `Terminal Tab: ${command}`;
+  statusBarItem.tooltip = `Terminal Tab Launcher: ${command}`;
 }
 
 /**
