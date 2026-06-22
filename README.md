@@ -8,7 +8,10 @@ Open a Terminal Tab in the VS Code editor area with a single shortcut.
 ## Author
 
 **Manuel Palanco Correa**  
-GitHub: [https://github.com/trystan4861](https://github.com/trystan4861)
+GitHub: [https://github.com/Trystan4861](https://github.com/Trystan4861)
+
+Repository:  
+[https://github.com/Trystan4861/Terminal-Tab.git](https://github.com/Trystan4861/Terminal-Tab.git)
 
 Spanish documentation: [README_ES.md](README_ES.md)
 

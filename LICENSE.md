@@ -19,9 +19,10 @@ This project is licensed under the **Apache License, Version 2.0 (January 2004)*
 - **Copyright (c) 2026 Manuel Palanco Correa**
 
 Author: Manuel Palanco Correa  
-GitHub: [https://github.com/trystan4861](https://github.com/trystan4861)
+GitHub: [https://github.com/Trystan4861](https://github.com/Trystan4861)
 
-Original GitHub Repository: [https://github.com/trystan4861/Terminal-Tab](https://github.com/trystan4861/Terminal-Tab)
+Official Repository:  
+[https://github.com/Trystan4861/Terminal-Tab.git](https://github.com/Trystan4861/Terminal-Tab.git)
 
 ---
 
