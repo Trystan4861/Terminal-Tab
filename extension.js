@@ -6,7 +6,7 @@ let statusBarItem;
  * Obtiene el comando configurado (default: whoami)
  */
 function getConfiguredCommand() {
-  const config = vscode.workspace.getConfiguration('terminal-tab');
+  const config = vscode.workspace.getConfiguration('terminal-tab-launcger');
   return config.get('command', 'whoami');
 }
 
@@ -21,22 +21,22 @@ function updateStatusBarTooltip() {
 /**
  * Busca un terminal existente llamado "TerminalTab"
  */
-function findExistingTerminal() {
-  return vscode.window.terminals.find(t => t.name === 'TerminalTab');
+function findExistingTerminalTabLauncher() {
+  return vscode.window.terminals.find(t => t.name === 'TerminalTabLauncher');
 }
 
 /**
  * Abre (o reutiliza) el terminal TerminalTab y ejecuta el comando configurado
  */
 function openTerminalTab(context) {
-  let terminal = findExistingTerminal();
+  let terminal = findExistingTerminalTabLauncher();
 
   if (terminal) {
     terminal.show();
     return;
   }
 
-  terminal = vscode.window.createTerminal({
+  terminal = vscode.window.createTerminalTabLauncher({
     name: 'TerminalTab',
     location: vscode.TerminalLocation.Editor,
     iconPath: vscode.Uri.joinPath(context.extensionUri, 'icon.png'),
@@ -53,15 +53,15 @@ function activate(context) {
 
   // Registrar comando principal
   const openCommand = vscode.commands.registerCommand(
-    'terminal-tab.open',
+    'terminal-tab-launcher.open',
     () => openTerminalTab(context)
   );
 
   // Comando: establecer comando
   const setCommand = vscode.commands.registerCommand(
-    'terminal-tab.setCommand',
+    'terminal-tab-launcher.setCommand',
     async () => {
-      const config = vscode.workspace.getConfiguration('terminal-tab');
+      const config = vscode.workspace.getConfiguration('terminal-tab-launcher');
       const currentValue = config.get('command', 'whoami');
 
       const newValue = await vscode.window.showInputBox({
@@ -71,7 +71,7 @@ function activate(context) {
 
       if (typeof newValue === 'string') {
         await vscode.workspace.getConfiguration().update(
-          'terminal-tab.command',
+          'terminal-tab-launcher.command',
           newValue,
           vscode.ConfigurationTarget.Global
         );
@@ -82,11 +82,11 @@ function activate(context) {
 
   // Comando: abrir configuración exacta del setting
   const openCommandSettings = vscode.commands.registerCommand(
-    'terminal-tab.openCommandSettings',
+    'terminal-tab-launcher.openCommandSettings',
     () => {
       vscode.commands.executeCommand(
         'workbench.action.openSettings',
-        'terminal-tab.command'
+        'terminal-tab-launcher.command'
       );
     }
   );
@@ -101,8 +101,8 @@ function activate(context) {
     1000
   );
 
-  statusBarItem.text = '$(terminal-compact) TerminalTab';
-  statusBarItem.command = 'terminal-tab.open';
+  statusBarItem.text = '$(terminal-compact) TTL';
+  statusBarItem.command = 'terminal-tab-launcher.open';
   updateStatusBarTooltip();
   statusBarItem.show();
 
@@ -110,7 +110,7 @@ function activate(context) {
 
   // Escuchar cambios en configuración
   vscode.workspace.onDidChangeConfiguration(e => {
-    if (e.affectsConfiguration('terminal-tab.command')) {
+    if (e.affectsConfiguration('terminal-tab-launcher.command')) {
       updateStatusBarTooltip();
     }
   });

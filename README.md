@@ -105,7 +105,7 @@ You can configure the command in three ways:
 3. Directly via VS Code Settings:
 
 ```txt
-terminal-tab.command
+terminal-tab-launcher.command
 ```
 
 Default value:

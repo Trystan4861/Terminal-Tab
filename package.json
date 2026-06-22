@@ -3,7 +3,7 @@
 	"displayName": "%ext.displayName%",
 	"publisher": "trystan4861",
 	"description": "%ext.description%",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"icon": "icon.png",
 	"license": "Apache-2.0",
 	"repository": {
@@ -38,7 +38,7 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "terminal-tab.open",
+				"command": "terminal-tab-launcher.open",
 				"title": "%command.open.title%",
 				"icon": {
 					"light": "icon.png",
@@ -46,17 +46,17 @@
 				}
 			},
 			{
-				"command": "terminal-tab.setCommand",
+				"command": "terminal-tab-launcher.setCommand",
 				"title": "%command.setCommand.title%"
 			},
 			{
-				"command": "terminal-tab.openCommandSettings",
+				"command": "terminal-tab-launcher.openCommandSettings",
 				"title": "%command.openCommandSettings.title%"
 			}
 		],
 		"keybindings": [
 			{
-				"command": "terminal-tab.open",
+				"command": "terminal-tab-launcher.open",
 				"key": "ctrl+f1",
 				"mac": "cmd+f1"
 			}
@@ -64,7 +64,7 @@
 		"menus": {
 			"editor/title": [
 				{
-					"command": "terminal-tab.open",
+					"command": "terminal-tab-launcher.open",
 					"group": "navigation"
 				}
 			]
@@ -72,7 +72,7 @@
 		"configuration": {
 			"title": "%configuration.title%",
 			"properties": {
-				"terminal-tab.command": {
+				"terminal-tab-launcher.command": {
 					"type": "string",
 					"default": "whoami",
 					"description": "%configuration.command.description%"
