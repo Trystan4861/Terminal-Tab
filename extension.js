@@ -101,7 +101,7 @@ function activate(context) {
     1000
   );
 
-  statusBarItem.text = '$(hubot) TerminalTab';
+  statusBarItem.text = '$(terminal-compact) TerminalTab';
   statusBarItem.command = 'terminal-tab.open';
   updateStatusBarTooltip();
   statusBarItem.show();
