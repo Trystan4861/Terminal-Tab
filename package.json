@@ -3,7 +3,7 @@
 	"displayName": "%ext.displayName%",
 	"publisher": "trystan4861",
 	"description": "%ext.description%",
-	"version": "1.0.1",
+	"version": "1.0.0",
 	"icon": "icon.png",
 	"license": "Apache-2.0",
 	"repository": {
@@ -32,7 +32,8 @@
 		"package.nls.es.json",
 		"package.nls.json",
 		"README.md",
-		"README_ES.md"
+		"README_ES.md",
+		"CHANGELOG.md"
 	],
 	"contributes": {
 		"commands": [
