@@ -6,7 +6,7 @@ let statusBarItem;
  * Obtiene el comando configurado (default: whoami)
  */
 function getConfiguredCommand() {
-  const config = vscode.workspace.getConfiguration('terminal-tab-launcger');
+  const config = vscode.workspace.getConfiguration('terminal-tab-launcher');
   return config.get('command', 'whoami');
 }
 
@@ -19,30 +19,31 @@ function updateStatusBarTooltip() {
 }
 
 /**
- * Busca un terminal existente llamado "TerminalTab"
+ * Busca un terminal existente llamado "TerminalTabLauncher"
  */
-function findExistingTerminalTabLauncher() {
-  return vscode.window.terminals.find(t => t.name === 'TerminalTabLauncher');
+function findExistingTerminal() {
+  return vscode.window.terminals.find(
+    t => t.name === 'TerminalTabLauncher'
+  );
 }
 
 /**
- * Abre (o reutiliza) el terminal TerminalTab y ejecuta el comando configurado
+ * Abre (o reutiliza) el terminal y ejecuta el comando configurado
  */
-function openTerminalTab(context) {
-  let terminal = findExistingTerminalTabLauncher();
+function openTerminal(context) {
+  let terminal = findExistingTerminal();
 
   if (terminal) {
     terminal.show();
-    return;
+  } else {
+    terminal = vscode.window.createTerminal({
+      name: 'TerminalTabLauncher',
+      location: vscode.TerminalLocation.Editor,
+      iconPath: vscode.Uri.joinPath(context.extensionUri, 'icon.png'),
+    });
+    terminal.show();
   }
 
-  terminal = vscode.window.createTerminalTabLauncher({
-    name: 'TerminalTab',
-    location: vscode.TerminalLocation.Editor,
-    iconPath: vscode.Uri.joinPath(context.extensionUri, 'icon.png'),
-  });
-
-  terminal.show();
   terminal.sendText(getConfiguredCommand());
 }
 
@@ -51,10 +52,10 @@ function openTerminalTab(context) {
  */
 function activate(context) {
 
-  // Registrar comando principal
+  // Comando principal
   const openCommand = vscode.commands.registerCommand(
     'terminal-tab-launcher.open',
-    () => openTerminalTab(context)
+    () => openTerminal(context)
   );
 
   // Comando: establecer comando
@@ -95,7 +96,7 @@ function activate(context) {
   context.subscriptions.push(setCommand);
   context.subscriptions.push(openCommandSettings);
 
-  // Botón en barra de estado
+  // Status bar
   statusBarItem = vscode.window.createStatusBarItem(
     vscode.StatusBarAlignment.Left,
     1000
@@ -109,11 +110,13 @@ function activate(context) {
   context.subscriptions.push(statusBarItem);
 
   // Escuchar cambios en configuración
-  vscode.workspace.onDidChangeConfiguration(e => {
-    if (e.affectsConfiguration('terminal-tab-launcher.command')) {
-      updateStatusBarTooltip();
-    }
-  });
+  context.subscriptions.push(
+    vscode.workspace.onDidChangeConfiguration(e => {
+      if (e.affectsConfiguration('terminal-tab-launcher.command')) {
+        updateStatusBarTooltip();
+      }
+    })
+  );
 }
 
 function deactivate() {}

@@ -3,7 +3,7 @@
 	"displayName": "%ext.displayName%",
 	"publisher": "trystan4861",
 	"description": "%ext.description%",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"icon": "icon.png",
 	"license": "Apache-2.0",
 	"repository": {
