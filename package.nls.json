@@ -1,0 +1,13 @@
+{
+  "ext.displayName": "Terminal Tab",
+  "ext.description": "Open a terminal in the VS Code editor area with a single shortcut (Cmd+F1)",
+
+  "command.open.title": "Terminal Tab: Open Terminal",
+  "command.setCommand.title": "Terminal Tab: Set command",
+  "command.openCommandSettings.title": "Terminal Tab: Open command setting",
+
+  "configuration.title": "Terminal Tab",
+  "configuration.command.description": "Command executed when opening the Terminal Tab",
+  "input.setCommand.prompt": "Enter the command to execute",
+  "status.tooltip": "Terminal Tab: {0}"
+}

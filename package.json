@@ -1,0 +1,78 @@
+{
+	"name": "terminal-tab",
+	"displayName": "%ext.displayName%",
+	"publisher": "trystan4861",
+	"description": "%ext.description%",
+	"version": "1.0.0",
+	"icon": "icon.png",
+	"license": "Apache-2.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/trystan4861/Terminal-Tab"
+	},
+	"engines": {
+		"vscode": "^1.85.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./extension.js",
+	"files": [
+		"extension.js",
+		"icon.png",
+		"LICENSE.md",
+		"package.json",
+		"package.nls.es.json",
+		"package.nls.json",
+		"README.md",
+		"README_ES.md"
+	],
+	"contributes": {
+		"commands": [
+			{
+				"command": "terminal-tab.open",
+				"title": "%command.open.title%",
+				"icon": {
+					"light": "icon.png",
+					"dark": "icon.png"
+				}
+			},
+			{
+				"command": "terminal-tab.setCommand",
+				"title": "%command.setCommand.title%"
+			},
+			{
+				"command": "terminal-tab.openCommandSettings",
+				"title": "%command.openCommandSettings.title%"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "terminal-tab.open",
+				"key": "ctrl+f1",
+				"mac": "cmd+f1"
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"command": "terminal-tab.open",
+					"group": "navigation"
+				}
+			]
+		},
+		"configuration": {
+			"title": "%configuration.title%",
+			"properties": {
+				"terminal-tab.command": {
+					"type": "string",
+					"default": "whoami",
+					"description": "%configuration.command.description%"
+				}
+			}
+		}
+	}
+}
