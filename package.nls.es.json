@@ -3,6 +3,8 @@
   "ext.description": "Abre una terminal en el área del editor de VS Code con un solo atajo (Cmd+F1)",
 
   "command.open.title": "Terminal Tab Launcher: Abrir terminal",
+  "command.show.title": "Terminal Tab Launcher: Mostrar terminal",
+  "command.relaunch.title": "Terminal Tab Launcher: Relanzar comando",
   "command.setCommand.title": "Terminal Tab Launcher: Establecer comando",
   "command.openCommandSettings.title": "Terminal Tab Launcher: Abrir configuración del comando",
 
