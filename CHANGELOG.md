@@ -10,6 +10,14 @@ proyecto sigue versionado semántico.
 
 ---
 
+## [1.0.9] - 2026-09-17
+
+### Cambios [v1.0.9]
+
+- Añadida detección de terminales restauradas al iniciar VS Code.
+- Añadida confirmación para reutilizar una terminal existente.
+- Mantenida la creación de una nueva pestaña cuando se elige no reutilizar.
+
 ## [1.0.8] - 2026-09-17
 
 ### Cambios

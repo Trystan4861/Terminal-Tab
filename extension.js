@@ -57,13 +57,31 @@ function getOrCreateTerminal(context) {
   return findExistingTerminal() || createTerminal(context);
 }
 
-function openTerminal(context) {
-  const terminal = findExistingTerminal();
-  if (terminal) {
-      terminal.show();
+async function openTerminal(context) {
+  const managedTerminal = findExistingTerminal();
+  if (managedTerminal) {
+    managedTerminal.show();
     updateStatusBar();
     return;
   }
+
+  const existingTerminal = vscode.window.activeTerminal || vscode.window.terminals[0];
+  if (existingTerminal) {
+    const reuse = await vscode.window.showInformationMessage(
+      getText(
+        '¿Reutilizar la terminal existente?',
+        'Reuse the existing terminal?'
+      ),
+      getText('Sí', 'Yes'),
+      getText('No', 'No')
+    );
+    if (reuse === getText('Sí', 'Yes')) {
+      existingTerminal.show();
+      updateStatusBar();
+      return;
+    }
+  }
+
   const newTerminal = createTerminal(context);
   newTerminal.show();
   newTerminal.sendText(getConfiguredCommand(), true);
