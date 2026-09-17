@@ -10,29 +10,18 @@ proyecto sigue versionado semántico.
 
 ---
 
-## [1.0.9] - 2026-09-17
+## [1.0.16] - 2026-09-17
 
-### Cambios [v1.0.9]
+### Correcciones [v1.0.16]
 
-- Añadida detección de terminales restauradas al iniciar VS Code.
-- Añadida confirmación para reutilizar una terminal existente.
-- Mantenida la creación de una nueva pestaña cuando se elige no reutilizar.
-
-## [1.0.8] - 2026-09-17
-
-### Cambios
-
+- Evitado el reenvío automático del comando al mostrar una pestaña `TTL` existente.
 - Cambiado dinámicamente el icono del status bar según exista la pestaña
   administrada.
-- Mostrada la acción **Abrir pestaña** cuando no existe una terminal `TTL`.
-- Ocultadas las acciones **Mostrar terminal** y **Relanzar comando** cuando no
-  existe la pestaña.
+- Mostrar la acciones **Abrir pestaña** y **Configurar comando** solo cuando
+  no existe una terminal `TTL`.
+- Mostrar la acciones **Mostrar terminal** y **Relanzar comando** solo cuando
+  existe una terminal `TTL`.
 - Añadidas traducciones para los estados y acciones dinámicos.
-
-## [1.0.7] - 2026-09-17
-
-### Correcciones
-
 - Minor bug fixes.
 - Mejoras generales de estabilidad y compatibilidad.
 

@@ -23,12 +23,12 @@ function updateStatusBar() {
   tooltip.appendMarkdown('**Terminal Tab Launcher**\n\n');
   tooltip.appendText(`${command}\n\n`);
   if (terminalExists) {
-    tooltip.appendMarkdown(`$(terminal) [${getText('Mostrar terminal', 'Show terminal')}](command:terminal-tab-launcher.show)  \\n`);
-    tooltip.appendMarkdown(`$(play) [${getText('Relanzar comando', 'Relaunch command')}](command:terminal-tab-launcher.relaunch)  \\n`);
+    tooltip.appendMarkdown(`$(terminal) [${getText('Mostrar terminal', 'Show terminal')}](command:terminal-tab-launcher.show)  \n`);
+    tooltip.appendMarkdown(`$(play) [${getText('Relanzar comando', 'Relaunch command')}](command:terminal-tab-launcher.relaunch)  \n`);
   } else {
-    tooltip.appendMarkdown(`$(play) [${getText('Abrir pestaña', 'Open tab')}](command:terminal-tab-launcher.open)  \\n`);
+    tooltip.appendMarkdown(`$(play) [${getText('Abrir pestaña', 'Open tab')}](command:terminal-tab-launcher.open)  \n`);
+    tooltip.appendMarkdown(`$(settings-gear) [${getText('Configurar comando', 'Configure command')}](command:terminal-tab-launcher.setCommand)`);
   }
-  tooltip.appendMarkdown(`$(settings-gear) [${getText('Configurar comando', 'Configure command')}](command:terminal-tab-launcher.setCommand)`);
   statusBarItem.tooltip = tooltip;
 }
 
@@ -42,6 +42,12 @@ function isManagedTerminal(terminal) {
 
 function findExistingTerminal() {
   return vscode.window.terminals.find(isManagedTerminal);
+}
+
+function isEditorTerminal(terminal) {
+  const location = terminal.creationOptions?.location;
+  return location === vscode.TerminalLocation.Editor
+    || location?.viewColumn !== undefined;
 }
 
 function createTerminal(context) {
@@ -65,21 +71,18 @@ async function openTerminal(context) {
     return;
   }
 
-  const existingTerminal = vscode.window.activeTerminal || vscode.window.terminals[0];
+  const existingTerminal = vscode.window.terminals.find(isEditorTerminal);
   if (existingTerminal) {
-    const reuse = await vscode.window.showInformationMessage(
+    const reuse = await vscode.window.showWarningMessage(
       getText(
-        '¿Reutilizar la terminal existente?',
-        'Reuse the existing terminal?'
+        'Ya existe una pestaña de terminal en el editor. Si la reutilizas, se interrumpirá cualquier proceso en ejecución y se cerrará esa pestaña. ¿Continuar?',
+        'A terminal tab already exists in the editor. Reusing it will interrupt any running process and close that tab. Continue?'
       ),
-      getText('Sí', 'Yes'),
+      getText('Sí, cerrar y abrir una nueva', 'Yes, close and open a new one'),
       getText('No', 'No')
     );
-    if (reuse === getText('Sí', 'Yes')) {
-      existingTerminal.show();
-      updateStatusBar();
-      return;
-    }
+    if (reuse !== getText('Sí, cerrar y abrir una nueva', 'Yes, close and open a new one')) return;
+    existingTerminal.dispose();
   }
 
   const newTerminal = createTerminal(context);
