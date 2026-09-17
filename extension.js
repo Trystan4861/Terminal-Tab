@@ -8,16 +8,27 @@ function getConfiguredCommand() {
   return vscode.workspace.getConfiguration('terminal-tab-launcher').get('command', 'whoami');
 }
 
-function updateStatusBarTooltip() {
+function getText(spanish, english) {
+  return vscode.env.language.startsWith('es') ? spanish : english;
+}
+
+function updateStatusBar() {
+  const terminalExists = Boolean(findExistingTerminal());
+  statusBarItem.text = `${terminalExists ? '$(terminal-compact)' : '$(play)'} TTL`;
+
   const command = getConfiguredCommand();
   const tooltip = new vscode.MarkdownString();
   tooltip.isTrusted = true;
   tooltip.supportThemeIcons = true;
   tooltip.appendMarkdown('**Terminal Tab Launcher**\n\n');
   tooltip.appendText(`${command}\n\n`);
-  tooltip.appendMarkdown('$(terminal) [Mostrar terminal](command:terminal-tab-launcher.show)  \n');
-  tooltip.appendMarkdown('$(play) [Relanzar comando](command:terminal-tab-launcher.relaunch)  \n');
-  tooltip.appendMarkdown('$(settings-gear) [Configurar comando](command:terminal-tab-launcher.setCommand)');
+  if (terminalExists) {
+    tooltip.appendMarkdown(`$(terminal) [${getText('Mostrar terminal', 'Show terminal')}](command:terminal-tab-launcher.show)  \\n`);
+    tooltip.appendMarkdown(`$(play) [${getText('Relanzar comando', 'Relaunch command')}](command:terminal-tab-launcher.relaunch)  \\n`);
+  } else {
+    tooltip.appendMarkdown(`$(play) [${getText('Abrir pestaña', 'Open tab')}](command:terminal-tab-launcher.open)  \\n`);
+  }
+  tooltip.appendMarkdown(`$(settings-gear) [${getText('Configurar comando', 'Configure command')}](command:terminal-tab-launcher.setCommand)`);
   statusBarItem.tooltip = tooltip;
 }
 
@@ -30,7 +41,7 @@ function isManagedTerminal(terminal) {
 }
 
 function findExistingTerminal() {
-  return vscode.window.terminals.find(isManagedTerminal) || vscode.window.activeTerminal;
+  return vscode.window.terminals.find(isManagedTerminal);
 }
 
 function createTerminal(context) {
@@ -49,28 +60,35 @@ function getOrCreateTerminal(context) {
 function openTerminal(context) {
   const terminal = findExistingTerminal();
   if (terminal) {
-    terminal.show();
+      terminal.show();
+    updateStatusBar();
     return;
   }
   const newTerminal = createTerminal(context);
   newTerminal.show();
   newTerminal.sendText(getConfiguredCommand(), true);
+  updateStatusBar();
 }
 
 function showTerminal(context) {
   getOrCreateTerminal(context).show();
+  updateStatusBar();
 }
 
 function relaunchTerminal(context) {
   const terminal = getOrCreateTerminal(context);
   terminal.show();
   terminal.sendText(getConfiguredCommand(), true);
+  updateStatusBar();
 }
 
 async function configureCommand() {
   const config = vscode.workspace.getConfiguration('terminal-tab-launcher');
   const newValue = await vscode.window.showInputBox({
-    prompt: 'Comando que se ejecutará al abrir la pestaña de terminal',
+    prompt: getText(
+      'Comando que se ejecutará al abrir la pestaña de terminal',
+      'Command to run when opening the terminal tab'
+    ),
     value: config.get('command', 'whoami')
   });
   if (typeof newValue !== 'string') return;
@@ -79,7 +97,7 @@ async function configureCommand() {
     newValue,
     vscode.ConfigurationTarget.Global
   );
-  updateStatusBarTooltip();
+  updateStatusBar();
 }
 
 function activate(context) {
@@ -110,14 +128,15 @@ function activate(context) {
   context.subscriptions.push(openCommand, showCommand, relaunchCommand, setCommand, openCommandSettings);
 
   statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1000);
-  statusBarItem.text = '$(terminal-compact) TTL';
   statusBarItem.command = 'terminal-tab-launcher.open';
-  updateStatusBarTooltip();
+  updateStatusBar();
   statusBarItem.show();
   context.subscriptions.push(statusBarItem);
 
+  context.subscriptions.push(vscode.window.onDidOpenTerminal(updateStatusBar));
+  context.subscriptions.push(vscode.window.onDidCloseTerminal(updateStatusBar));
   context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(event => {
-    if (event.affectsConfiguration('terminal-tab-launcher.command')) updateStatusBarTooltip();
+    if (event.affectsConfiguration('terminal-tab-launcher.command')) updateStatusBar();
   }));
 }
 

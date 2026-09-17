@@ -10,6 +10,24 @@ proyecto sigue versionado semántico.
 
 ---
 
+## [1.0.8] - 2026-09-17
+
+### Cambios
+
+- Cambiado dinámicamente el icono del status bar según exista la pestaña
+  administrada.
+- Mostrada la acción **Abrir pestaña** cuando no existe una terminal `TTL`.
+- Ocultadas las acciones **Mostrar terminal** y **Relanzar comando** cuando no
+  existe la pestaña.
+- Añadidas traducciones para los estados y acciones dinámicos.
+
+## [1.0.7] - 2026-09-17
+
+### Correcciones
+
+- Minor bug fixes.
+- Mejoras generales de estabilidad y compatibilidad.
+
 ## [1.0.6] - 2026-09-17
 
 ### Cambios de identificación
@@ -21,12 +39,10 @@ proyecto sigue versionado semántico.
 
 ## [1.0.5] - 2026-09-17
 
-### Fixed
+### Actualizaciones
 
 - Minor bug fixes.
-- Restaurada la reutilización de la terminal activa al abrir la extensión.
-- Evitado el relanzamiento accidental del comando al mostrar una terminal
-  existente.
+- Mejoras generales de estabilidad y compatibilidad.
 
 ## [1.0.4] - 2026-09-17
 
